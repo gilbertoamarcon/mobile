@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-// #include <wiringPi.h>
+#include <wiringPi.h>
 
 // Output pin numbers
 #define PIN_L	21
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
 	
 	printf("ARGS: %d AND %d\n",delay_l,delay_r);
 
-/*	wiringPiSetupGpio();
+	wiringPiSetupGpio();
 
 	pinMode(PIN_L, OUTPUT);
 	pinMode(PIN_R, OUTPUT);
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
 			digitalWrite(PIN_L, LOW);
 		}
 		delayMicroseconds(delay_rem);
-	}*/
+	}
 
 	return 0;
 }
