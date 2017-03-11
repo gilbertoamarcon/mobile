@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <wiringPi.h>
+// #include <wiringPi.h>
 
 // Output pin numbers
 #define PIN_L	21
@@ -19,9 +19,9 @@ int main(int argc, char *argv[]){
 		return 0;
 	}
 	
-	printf("ARGS: %s AND %s\n",argv[2],argv[3]);
+	printf("ARGS: %d AND %d\n",atoi(argv[2]),atoi(argv[3]));
 
-	int num_loops	= atoi(argv[1]);
+/*	int num_loops	= atoi(argv[1]);
 	int delay_l		= 1500+(int)atoi(argv[2]);
 	int delay_r		= 1500+(int)atoi(argv[3]);
 	int delay_diff	= delay_r-delay_l;
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
 			digitalWrite(PIN_L, LOW);
 		}
 		delayMicroseconds(delay_rem);
-	}
+	}*/
 
 	return 0;
 }
