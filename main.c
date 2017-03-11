@@ -5,6 +5,9 @@
 // Default spinning time (ms)
 #define DEF_TIME 1000
 
+// Velocity limit
+#define MAX_VEL 100
+
 // Output pin numbers
 #define PIN_L	21
 #define PIN_R	20
@@ -13,6 +16,9 @@
 #define PERIOD	20000
 
 int main(int argc, char *argv[]){
+
+	int vel_l		= 0;
+	int vel_r		= 0;
 
 	int delay_l		= 0;
 	int delay_r		= 0;
@@ -28,8 +34,16 @@ int main(int argc, char *argv[]){
 	else
 		num_loops	= atoi(argv[3])/20;
 
-	delay_l		= (int)(1500-5*atoi(argv[1]));
-	delay_r		= (int)(1500-5*atoi(argv[2]));
+	vel_l		= atoi(argv[1]);
+	vel_r		= atoi(argv[2]);
+
+	if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
+	if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
+	if(-vel_l > MAX_VEL) vel_l = -MAX_VEL;
+	if(-vel_r > MAX_VEL) vel_r = -MAX_VEL;
+
+	delay_l		= (int)(1500-5*vel_l);
+	delay_r		= (int)(1500-5*vel_r);
 	delay_diff	= delay_r-delay_l;
 	delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
