@@ -18,6 +18,9 @@ int main(int argc, char *argv[]){
 		printf("Please, provide the number of loops.\n");
 		return 0;
 	}
+	
+	printf("ARGS: %s AND %s\n",argv[2],argv[3]);
+
 	int num_loops	= atoi(argv[1]);
 	int delay_l		= 1500+(int)atoi(argv[2]);
 	int delay_r		= 1500+(int)atoi(argv[3]);
