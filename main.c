@@ -19,8 +19,8 @@ int main(int argc, char *argv[]){
 		return 0;
 	}
 	int num_loops	= atoi(argv[1]);
-	int delay_l		= 1000+atoi(argv[2]);
-	int delay_r		= 1000+atoi(argv[3]);
+	int delay_l		= 1500+(int)atoi(argv[2]);
+	int delay_r		= 1500+(int)atoi(argv[3]);
 	int delay_diff	= delay_r-delay_l;
 	int delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
