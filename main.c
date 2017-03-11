@@ -32,11 +32,19 @@ int main(int argc, char *argv[]){
 	for(int i = 0; i < num_loops; i++){
 		digitalWrite(PIN_L, HIGH);
 		digitalWrite(PIN_R, HIGH);
-		delayMicroseconds(velL);
-		digitalWrite(PIN_L, LOW);
-		delayMicroseconds(velR-velL);
-		digitalWrite(PIN_R, LOW);
-		delayMicroseconds(PERIOD-velR);
+		if(velR > velL){
+			delayMicroseconds(velL);
+			digitalWrite(PIN_L, LOW);
+			delayMicroseconds(velR-velL);
+			digitalWrite(PIN_R, LOW);
+			delayMicroseconds(PERIOD-velR);
+		}else{
+			delayMicroseconds(velR);
+			digitalWrite(PIN_R, LOW);
+			delayMicroseconds(velL-velR);
+			digitalWrite(PIN_L, LOW);
+			delayMicroseconds(PERIOD-velL);
+		}
 	}
 
 	return 0;
