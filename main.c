@@ -11,25 +11,19 @@
 
 int main(int argc, char *argv[]){
 
-	if(argc < 4){
-		printf("Please, provide the number of loops.\n");
+	if(argc < 4)
 		return 0;
-	}
 
 	int num_loops	= atoi(argv[1])/20;
 	int delay_l		= (int)(1500-5*atoi(argv[2]));
 	int delay_r		= (int)(1500-5*atoi(argv[3]));
 	int delay_diff	= delay_r-delay_l;
 	int delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
-	
-	printf("ARGS: %d AND %d\n",delay_l,delay_r);
 
 	wiringPiSetupGpio();
 
 	pinMode(PIN_L, OUTPUT);
 	pinMode(PIN_R, OUTPUT);
-
-	printf("Controller running. Press CTRL+C to quit.\n");
 
 	for(int i = 0; i < num_loops; i++){
 		digitalWrite(PIN_L, HIGH);
