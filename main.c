@@ -18,9 +18,11 @@ int main(int argc, char *argv[]){
 		printf("Please, provide the number of loops.\n");
 		return 0;
 	}
-	int num_loops = atoi(argv[1]);
-	int velL = atoi(argv[2]);
-	int velR = atoi(argv[3]);
+	int num_loops	= atoi(argv[1]);
+	int delay_l		= atoi(argv[2]);
+	int delay_r		= atoi(argv[3]);
+	int delay_diff	= delay_r-delay_l;
+	int delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
 	wiringPiSetupGpio();
 
@@ -32,19 +34,18 @@ int main(int argc, char *argv[]){
 	for(int i = 0; i < num_loops; i++){
 		digitalWrite(PIN_L, HIGH);
 		digitalWrite(PIN_R, HIGH);
-		if(velR > velL){
-			delayMicroseconds(velL);
+		if(delay_diff > 0){
+			delayMicroseconds(delay_l);
 			digitalWrite(PIN_L, LOW);
-			delayMicroseconds(velR-velL);
+			delayMicroseconds(delay_diff);
 			digitalWrite(PIN_R, LOW);
-			delayMicroseconds(PERIOD-velR);
 		}else{
-			delayMicroseconds(velR);
+			delayMicroseconds(delay_r);
 			digitalWrite(PIN_R, LOW);
-			delayMicroseconds(velL-velR);
+			delayMicroseconds(-delay_diff);
 			digitalWrite(PIN_L, LOW);
-			delayMicroseconds(PERIOD-velL);
 		}
+		delayMicroseconds(delay_rem);
 	}
 
 	return 0;
