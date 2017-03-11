@@ -36,7 +36,7 @@ int main(int argc, char *argv[]){
 		digitalWrite(PIN_L, LOW);
 		delayMicroseconds(velR-velL);
 		digitalWrite(PIN_R, LOW);
-		delayMicroseconds(PERIOD-velocity);
+		delayMicroseconds(PERIOD-velR);
 	}
 
 	return 0;
