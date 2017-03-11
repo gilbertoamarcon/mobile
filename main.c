@@ -18,16 +18,16 @@ int main(int argc, char *argv[]){
 		printf("Please, provide the number of loops.\n");
 		return 0;
 	}
-	
-	printf("ARGS: %d AND %d\n",atoi(argv[2]),atoi(argv[3]));
 
-/*	int num_loops	= atoi(argv[1]);
+	int num_loops	= atoi(argv[1]);
 	int delay_l		= 1500+(int)atoi(argv[2]);
 	int delay_r		= 1500+(int)atoi(argv[3]);
 	int delay_diff	= delay_r-delay_l;
 	int delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
+	
+	printf("ARGS: %d AND %d\n",delay_l,delay_r);
 
-	wiringPiSetupGpio();
+/*	wiringPiSetupGpio();
 
 	pinMode(PIN_L, OUTPUT);
 	pinMode(PIN_R, OUTPUT);
