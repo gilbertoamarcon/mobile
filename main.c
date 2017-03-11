@@ -14,11 +14,12 @@
 
 int main(int argc, char *argv[]){
 
-	if(argc < 2){
+	if(argc < 3){
 		printf("Please, provide the number of loops.\n");
 		return 0;
 	}
 	int num_loops = atoi(argv[1]);
+	int velocity = atoi(argv[2]);
 
 	wiringPiSetupGpio();
 
@@ -30,10 +31,10 @@ int main(int argc, char *argv[]){
 	for(int i = 0; i < num_loops; i++){
 		digitalWrite(PIN_L, HIGH);
 		digitalWrite(PIN_R, HIGH);
-		delayMicroseconds(VEL);
+		delayMicroseconds(velocity);
 		digitalWrite(PIN_L, LOW);
 		digitalWrite(PIN_R, LOW);
-		delayMicroseconds(PERIOD-VEL);
+		delayMicroseconds(PERIOD-velocity);
 	}
 
 	return 0;
