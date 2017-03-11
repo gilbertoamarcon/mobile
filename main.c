@@ -42,8 +42,8 @@ int main(int argc, char *argv[]){
 	if(-vel_l > MAX_VEL) vel_l = -MAX_VEL;
 	if(-vel_r > MAX_VEL) vel_r = -MAX_VEL;
 
-	delay_l		= (int)(1500-5*vel_l);
-	delay_r		= (int)(1500-5*vel_r);
+	delay_l		= (int)(1500+5*vel_l);
+	delay_r		= (int)(1500+5*vel_r);
 	delay_diff	= delay_r-delay_l;
 	delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
