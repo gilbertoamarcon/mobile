@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <wiringPi.h>
 
+// Default spinning time (ms)
+#define DEF_TIME 1000
+
 // Output pin numbers
 #define PIN_L	21
 #define PIN_R	20
@@ -11,14 +14,24 @@
 
 int main(int argc, char *argv[]){
 
-	if(argc < 4)
+	int delay_l		= 0;
+	int delay_r		= 0;
+	int num_loops	= 0;
+	int delay_diff	= 0;
+	int delay_rem	= 0;
+
+	if(argc < 3)
 		return 0;
 
-	int num_loops	= atoi(argv[1])/20;
-	int delay_l		= (int)(1500-5*atoi(argv[2]));
-	int delay_r		= (int)(1500-5*atoi(argv[3]));
-	int delay_diff	= delay_r-delay_l;
-	int delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
+	if(argc < 4)
+		num_loops	= DEF_TIME/20;
+	else
+		num_loops	= atoi(argv[3])/20;
+
+	delay_l		= (int)(1500-5*atoi(argv[1]));
+	delay_r		= (int)(1500-5*atoi(argv[2]));
+	delay_diff	= delay_r-delay_l;
+	delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
 	wiringPiSetupGpio();
 
