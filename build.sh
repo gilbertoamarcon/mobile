@@ -1,2 +1,1 @@
-gcc -o main main.c -l wiringPi -std=c99
-./main 50
+gcc -o driver driver.c -l wiringPi -std=c99
