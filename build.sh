@@ -1,1 +1,1 @@
-gcc -o driver driver.c -l wiringPi -std=c99
+gcc -o bin/driver src/driver.c -l wiringPi -std=c99
