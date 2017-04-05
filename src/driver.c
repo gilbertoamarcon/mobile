@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#if PI
 #include <wiringPi.h>
+#endif
 
 // Velocity file
-#define VEL_PATH 	"/tmp/vel"
+#define VEL_PATH 	"vel"
 #define B_SIZE 		15
 
 // Velocity limit
@@ -16,16 +18,6 @@
 // Low padding (us)
 #define PERIOD		20000
 
-void read_vel(int *vel_l,int *vel_r){
-	FILE *file = NULL;
-	char buffer[B_SIZE];
-	while(file == NULL)
-		file = fopen(VEL_PATH,"r");
-	*vel_l = atoi(fgets(buffer, B_SIZE, (FILE*)file));
-	*vel_r= atoi(fgets(buffer, B_SIZE, (FILE*)file));
-	fclose(file);
-}
-
 int main(int argc, char *argv[]){
 
 	int vel_l		= 0;
@@ -36,14 +28,25 @@ int main(int argc, char *argv[]){
 	int delay_diff	= 0;
 	int delay_rem	= 0;
 
+	#if PI
 	wiringPiSetupGpio();
-
 	pinMode(PIN_L, OUTPUT);
 	pinMode(PIN_R, OUTPUT);
+	#endif
 
+	FILE *file = NULL;
+	char buffer[B_SIZE];
 	for(;;){
 
-		read_vel(&vel_l,&vel_r);
+		file = fopen(VEL_PATH,"r");		
+		if(file != NULL){
+			fgets(buffer, B_SIZE, (FILE*)file);
+			vel_l = atoi(buffer);
+			fgets(buffer, B_SIZE, (FILE*)file);
+			fclose(file);
+			vel_r= atoi(buffer);
+		}
+		printf("%d %d\n",vel_l,vel_r);
 
 		if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
 		if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
@@ -55,6 +58,7 @@ int main(int argc, char *argv[]){
 		delay_diff	= delay_r-delay_l;
 		delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
 
+		#if PI
 		digitalWrite(PIN_L, HIGH);
 		digitalWrite(PIN_R, HIGH);
 		if(delay_diff > 0){
@@ -69,6 +73,7 @@ int main(int argc, char *argv[]){
 			digitalWrite(PIN_L, LOW);
 		}
 		delayMicroseconds(delay_rem);
+		#endif
 	}
 
 	return 0;
