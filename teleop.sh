@@ -43,8 +43,8 @@ while true; do
 		1)
 			vel=20
 			;;
-		j)
-			vel=10
+		0)
+			vel=0
 			;;
 	esac
 	case $dir in
