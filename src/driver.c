@@ -3,7 +3,7 @@
 #include <wiringPi.h>
 
 // Velocity file
-#define VEL_PATH 	"vel"
+#define VEL_PATH 	"/tmp/vel"
 #define B_SIZE 		15
 
 // Velocity limit
@@ -44,7 +44,6 @@ int main(int argc, char *argv[]){
 	for(;;){
 
 		read_vel(&vel_l,&vel_r);
-		printf("%d %d\n",vel_l,vel_r);
 
 		if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
 		if( vel_r > MAX_VEL) vel_r =  MAX_VEL;

@@ -1,6 +1,10 @@
 #!/bin/bash
 v=0
 val=w
+pipe=/tmp/vel
+if [[ ! -p $pipe ]]; then
+    mkfifo $pipe
+fi
 while true; do
 	read -n 1 resp
 	case $resp in
@@ -52,16 +56,17 @@ while true; do
 	esac
 	case $val in
 		w)
-			printf " $v\n$v" > vel
+			printf " $v\n$v" > $pipe
 			;;
 		s)
-			printf " -$v\n-$v" > vel
+			printf " -$v\n-$v" > $pipe
 			;;
 		d)
-			printf " $v\n-$v" > vel
+			printf " $v\n-$v" > $pipe
 			;;
 		a)
-			printf " -$v\n$v" > vel
+			printf " -$v\n$v" > $pipe
 			;;
 	esac
 done
+
