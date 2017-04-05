@@ -1,67 +1,64 @@
 #!/bin/bash
-v=0
-val=w
+vel=0
+dir=w
 while true; do
 	read -n 1 resp
 	case $resp in
 		w)
-			val=w
+			dir=w
 			;;
 		s)
-			val=s
+			dir=s
 			;;
 		a)
-			val=a
+			dir=a
 			;;
 		d)
-			val=d
+			dir=d
 			;;
-		p)
-			v=100
+		9)
+			vel=100
 			;;
-		o)
-			v=90
+		8)
+			vel=90
 			;;
-		i)
-			v=80
+		7)
+			vel=80
 			;;
-		u)
-			v=70
+		6)
+			vel=70
 			;;
-		y)
-			v=60
+		5)
+			vel=60
 			;;
-		t)
-			v=50
+		4)
+			vel=50
 			;;
-		r)
-			v=40
+		3)
+			vel=40
 			;;
-		l)
-			v=30
+		2)
+			vel=30
 			;;
-		k)
-			v=20
+		1)
+			vel=20
 			;;
 		j)
-			v=10
-			;;
-		h)
-			v=0
+			vel=10
 			;;
 	esac
-	case $val in
+	case $dir in
 		w)
-			printf " $v\n$v" > vel
+			printf " $vel\n$vel" > vel
 			;;
 		s)
-			printf " -$v\n-$v" > vel
+			printf " -$vel\n-$vel" > vel
 			;;
 		d)
-			printf " $v\n-$v" > vel
+			printf " $vel\n-$vel" > vel
 			;;
 		a)
-			printf " -$v\n$v" > vel
+			printf " -$vel\n$vel" > vel
 			;;
 	esac
 done

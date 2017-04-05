@@ -15,49 +15,66 @@
 #define PIN_L		21
 #define PIN_R		20
 
-// Low padding (us)
-#define PERIOD		20000
+// Low padding period (us)
+#define PERIOD_PAD	20000
+
+// Zero vel period (us)
+#define PERIOD_ZER	1500
 
 int main(int argc, char *argv[]){
 
+	// 0-100% wheel velocity
 	int vel_l		= 0;
 	int vel_r		= 0;
 
-	int delay_l		= 0;
-	int delay_r		= 0;
+	// Signal delays
+	int delay_l		= PERIOD_ZER;
+	int delay_r		= PERIOD_ZER;
 	int delay_diff	= 0;
-	int delay_rem	= 0;
+	int delay_rem	= PERIOD_PAD-PERIOD_ZER;
 
+	// Pin output config
 	#if PI
 	wiringPiSetupGpio();
 	pinMode(PIN_L, OUTPUT);
 	pinMode(PIN_R, OUTPUT);
 	#endif
-
+	
+	// File buffers
 	FILE *file = NULL;
-	char buffer[B_SIZE];
+	char buffer_l[B_SIZE];
+	char buffer_r[B_SIZE];
+
+	// Main loop
 	for(;;){
 
+		// Updating velocity from file
 		file = fopen(VEL_PATH,"r");		
 		if(file != NULL){
-			fgets(buffer, B_SIZE, (FILE*)file);
-			vel_l = atoi(buffer);
-			fgets(buffer, B_SIZE, (FILE*)file);
+
+			// Reading file
+			fgets(buffer_l, B_SIZE, (FILE*)file);
+			fgets(buffer_r, B_SIZE, (FILE*)file);
 			fclose(file);
-			vel_r= atoi(buffer);
+
+			// Parsing file
+			vel_l = atoi(buffer_l);
+			vel_r = atoi(buffer_r);
+
+			// Enforcing velocity limits
+			if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
+			if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
+			if(-vel_l > MAX_VEL) vel_l = -MAX_VEL;
+			if(-vel_r > MAX_VEL) vel_r = -MAX_VEL;
+
+			// Computing time delays
+			delay_l		= (int)(PERIOD_ZER+5*vel_l);
+			delay_r		= (int)(PERIOD_ZER+5*vel_r);
+			delay_diff	= delay_r-delay_l;
+			delay_rem	= (delay_diff>0)?PERIOD_PAD-delay_r:PERIOD_PAD-delay_l;
 		}
-		printf("%d %d\n",vel_l,vel_r);
 
-		if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
-		if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
-		if(-vel_l > MAX_VEL) vel_l = -MAX_VEL;
-		if(-vel_r > MAX_VEL) vel_r = -MAX_VEL;
-
-		delay_l		= (int)(1500+5*vel_l);
-		delay_r		= (int)(1500+5*vel_r);
-		delay_diff	= delay_r-delay_l;
-		delay_rem	= (delay_diff>0)?PERIOD-delay_r:PERIOD-delay_l;
-
+		// Writing pins
 		#if PI
 		digitalWrite(PIN_L, HIGH);
 		digitalWrite(PIN_R, HIGH);
@@ -74,6 +91,7 @@ int main(int argc, char *argv[]){
 		}
 		delayMicroseconds(delay_rem);
 		#endif
+
 	}
 
 	return 0;
