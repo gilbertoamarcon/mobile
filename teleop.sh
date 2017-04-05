@@ -1,4 +1,6 @@
 #!/bin/bash
+./bin/driver &
+./cam_server.sh &
 vel=0
 dir=w
 while true; do
