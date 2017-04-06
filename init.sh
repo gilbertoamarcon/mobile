@@ -1,3 +1,3 @@
 #!/bin/bash
-setsid ~/mobile/cam_driver.sh &
+setsid ~/mobile/cam_server.sh &
 setsid ~/mobile/bin/driver &
