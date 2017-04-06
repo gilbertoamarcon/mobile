@@ -1,3 +1,6 @@
+# v4l2 server setup
+# This article explains how to setup low delay (<1s) video transmission over the network from Raspberry PI 3.
+
 curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
 sudo nano /etc/apt/sources.list
 deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main

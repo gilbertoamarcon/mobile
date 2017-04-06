@@ -16,6 +16,12 @@ while true; do
 		d)
 			dir=d
 			;;
+		q)
+			dir=q
+			;;
+		e)
+			dir=e
+			;;
 		9)
 			vel=100
 			;;
@@ -54,11 +60,17 @@ while true; do
 		s)
 			printf " -$vel\n-$vel" > vel
 			;;
+		a)
+			printf " -$vel\n$vel" > vel
+			;;
 		d)
 			printf " $vel\n-$vel" > vel
 			;;
-		a)
-			printf " -$vel\n$vel" > vel
+		q)
+			printf " $(($vel/2))\n$(($vel))" > vel
+			;;
+		e)
+			printf " $(($vel))\n$(($vel/2))" > vel
 			;;
 	esac
 done
