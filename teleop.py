@@ -32,7 +32,7 @@ while True:
 	if resp=='w' or resp=='s' or resp=='a' or resp=='d' or resp=='q' or resp=='e':
 		dir=resp
 	if resp > '0' and resp < '9':
-		vela=5+10*int(resp)
+		vela=10*int(resp)
 	if resp == 'p':
 		velb=0
 	if resp == 'o':
