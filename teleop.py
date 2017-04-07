@@ -15,8 +15,8 @@ def input_char():
     return chr(ch)
 #--------------------------------------
 
-bwd=2
-wide=0.5
+bwd=2.5
+wide=0.3
 vela=0
 velb=0
 vel_l=0
