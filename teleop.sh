@@ -77,7 +77,7 @@ while true; do
 			velb=6
 			;;
 	esac
-	vel=vela-velb
+	vel=$((vela-velb))
 	case $dir in
 		w)
 			printf " $vel\n$vel" > vel
