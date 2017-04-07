@@ -1,5 +1,7 @@
 #!/bin/bash
 bwd=2
+vela=0
+velb=0
 vel=0
 dir=w
 while true; do
@@ -24,36 +26,58 @@ while true; do
 			dir=e
 			;;
 		9)
-			vel=100
+			vela=100
 			;;
 		8)
-			vel=90
+			vela=90
 			;;
 		7)
-			vel=80
+			vela=80
 			;;
 		6)
-			vel=70
+			vela=70
 			;;
 		5)
-			vel=60
+			vela=60
 			;;
 		4)
-			vel=50
+			vela=50
 			;;
 		3)
-			vel=40
+			vela=40
 			;;
 		2)
-			vel=30
+			vela=30
 			;;
 		1)
-			vel=20
+			vela=20
 			;;
 		0)
-			vel=0
+			vela=0
+			;;
+		p)
+			velb=0
+			;;
+		o)
+			velb=1
+			;;
+		i)
+			velb=2
+			;;
+		u)
+			velb=3
+			;;
+		y)
+			velb=4
+			;;
+		t)
+			velb=5
+			;;
+		r)
+			velb=6
 			;;
 	esac
+	vel=vela-velb
 	case $dir in
 		w)
 			printf " $vel\n$vel" > vel
@@ -68,10 +92,10 @@ while true; do
 			printf " $vel\n-$(($vel*2))" > vel
 			;;
 		q)
-			printf " $(($vel/2))\n$(($vel))" > vel
+			printf " $(($vel/3))\n$(($vel))" > vel
 			;;
 		e)
-			printf " $(($vel))\n$(($vel/2))" > vel
+			printf " $(($vel))\n$(($vel/3))" > vel
 			;;
 	esac
 done
