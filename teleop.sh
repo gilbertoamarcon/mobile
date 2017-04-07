@@ -1,4 +1,5 @@
 #!/bin/bash
+bwd=2
 vel=0
 dir=w
 while true; do
@@ -58,13 +59,13 @@ while true; do
 			printf " $vel\n$vel" > vel
 			;;
 		s)
-			printf " -$vel\n-$vel" > vel
+			printf " -$(($vel*2))\n-$(($vel*2))" > vel
 			;;
 		a)
-			printf " -$vel\n$vel" > vel
+			printf " -$(($vel*2))\n$vel" > vel
 			;;
 		d)
-			printf " $vel\n-$vel" > vel
+			printf " $vel\n-$(($vel*2))" > vel
 			;;
 		q)
 			printf " $(($vel/2))\n$(($vel))" > vel
