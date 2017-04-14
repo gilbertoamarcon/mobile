@@ -24,9 +24,9 @@ int main(int argc, char *argv[]){
 		#if PI
 		// Stepper
 		digitalWrite(PIN_S, HIGH);
-		delayMicroseconds(10000);
+		delayMicroseconds(1000000);
 		digitalWrite(PIN_S, LOW);
-		delayMicroseconds(10000);
+		delayMicroseconds(1000000);
 		#endif
 
 	}
