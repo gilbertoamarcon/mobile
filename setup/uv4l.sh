@@ -1,5 +1,5 @@
 # v4l2 server setup
-# This article explains how to setup low delay (<1s) video transmission over the network from Raspberry PI 3.
+# Steps to setup low delay (<1s) video transmission over the network from Raspberry PI 3.
 
 curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
 sudo nano /etc/apt/sources.list
@@ -27,5 +27,3 @@ cd v4l2rtspserver
 cmake . && make
 cd ~/v4l2rtspserver
 ./v4l2rtspserver -W 320 -H 240 -F 5 -P 8554 /dev/video0
-
-rtsp://rasp:8554/unicast
