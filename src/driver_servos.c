@@ -44,6 +44,7 @@ int main(int argc, char *argv[]){
 	FILE *file = NULL;
 	char buffer_l[B_SIZE];
 	char buffer_r[B_SIZE];
+	char buffer_s[B_SIZE];
 
 	// Main loop
 	for(;;){
@@ -55,12 +56,15 @@ int main(int argc, char *argv[]){
 			// Reading file
 			fgets(buffer_l, B_SIZE, (FILE*)file);
 			fgets(buffer_r, B_SIZE, (FILE*)file);
+			fgets(buffer_s, B_SIZE, (FILE*)file);
 			fclose(file);
 
 			// Parsing file
 			vel_l = atoi(buffer_l);
 			vel_r = atoi(buffer_r);
+			vel_s = atoi(buffer_s);
 
+			printf("%d %d %d", vel_l, vel_r, vel_s);
 			// Enforcing velocity limits
 			if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
 			if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
