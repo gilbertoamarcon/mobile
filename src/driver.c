@@ -14,6 +14,8 @@
 // Output pin numbers
 #define PIN_L		21
 #define PIN_R		20
+#define PIN_SDIR	19
+#define PIN_STEP	16
 
 // Low padding period (us)
 #define PERIOD_PAD	20000
@@ -26,6 +28,7 @@ int main(int argc, char *argv[]){
 	// 0-100% wheel velocity
 	int vel_l		= 0;
 	int vel_r		= 0;
+	int vel_s		= 0;
 
 	// Signal delays
 	int delay_l		= PERIOD_ZER;
@@ -64,7 +67,6 @@ int main(int argc, char *argv[]){
 			vel_r = atoi(buffer_r);
 			vel_s = atoi(buffer_s);
 
-			printf("%d %d %d", vel_l, vel_r, vel_s);
 			// Enforcing velocity limits
 			if( vel_l > MAX_VEL) vel_l =  MAX_VEL;
 			if( vel_r > MAX_VEL) vel_r =  MAX_VEL;
@@ -80,23 +82,33 @@ int main(int argc, char *argv[]){
 
 		// Writing pins
 		#if PI
-		digitalWrite(PIN_L, HIGH);
-		digitalWrite(PIN_R, HIGH);
-		if(delay_diff > 0){
-			delayMicroseconds(delay_l);
-			digitalWrite(PIN_L, LOW);
-			delayMicroseconds(delay_diff);
-			digitalWrite(PIN_R, LOW);
-		}else{
-			delayMicroseconds(delay_r);
-			digitalWrite(PIN_R, LOW);
-			delayMicroseconds(-delay_diff);
-			digitalWrite(PIN_L, LOW);
+		if(vel_s == 0){
+			digitalWrite(PIN_L, HIGH);
+			digitalWrite(PIN_R, HIGH);
+			if(delay_diff > 0){
+				delayMicroseconds(delay_l);
+				digitalWrite(PIN_L, LOW);
+				delayMicroseconds(delay_diff);
+				digitalWrite(PIN_R, LOW);
+			}else{
+				delayMicroseconds(delay_r);
+				digitalWrite(PIN_R, LOW);
+				delayMicroseconds(-delay_diff);
+				digitalWrite(PIN_L, LOW);
+			}
+			delayMicroseconds(delay_rem);
 		}
-		delayMicroseconds(delay_rem);
+		else {
+			if (vel_s > 0)
+				digitalWrite(PIN_SDIR, LOW);
+			if (vel_s < 0)
+				digitalWrite(PIN_SDIR, HIGH);
+			delayMicroseconds(200);
+			digitalWrite(PIN_STEP, HIGH);
+			delayMicroseconds(200);
+			digitalWrite(PIN_STEP, LOW);
+		}
 		#endif
-
 	}
-
 	return 0;
 }
