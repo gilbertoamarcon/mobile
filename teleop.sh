@@ -1,6 +1,6 @@
 #!/bin/bash
-vel=0
 key=w
+vel=0
 vfwd=(0 40 45 50 55 60 65 70 80 100)
 vbwd=(0 8 10 12 15 20 25 30 50 100)
 while true; do
@@ -74,12 +74,6 @@ while true; do
 		d)
 			printf " ${vfwd[vel]}\n-${vbwd[vel]}\n0)" > vel
 			;;
-		# q)
-		# 	printf " $(($vel*2))\n$(($vel*3))\n0" > vel
-		# 	;;
-		# e)
-		# 	printf " $(($vel*3))\n$(($vel*2))\n0" > vel
-		# 	;;
 		z)
 			printf " 0\n0\n ${vfwd[vel]}" > vel
 			;;
