@@ -31,31 +31,31 @@ while true; do
 			key=x
 			;;
 		9)
-			vel=9
+			vel=1
 			;;
 		8)
-			vel=8
+			vel=2
 			;;
 		7)
-			vel=7
+			vel=3
 			;;
 		6)
-			vel=6
+			vel=4
 			;;
 		5)
 			vel=5
 			;;
 		4)
-			vel=4
+			vel=6
 			;;
 		3)
-			vel=3
+			vel=7
 			;;
 		2)
-			vel=2
+			vel=8
 			;;
 		1)
-			vel=1
+			vel=9
 			;;
 		0)
 			vel=0
