@@ -86,22 +86,22 @@ while true; do
 	vel=$((vela-velb))
 	case $dir in
 		w)
-			printf " $vel\n$vel\n0" > vel
+			printf " $(($vel*2))\n$(($vel*2))\n0" > vel
 			;;
 		s)
-			printf " -$(($vel*2))\n-$(($vel*2))\n0" > vel
+			printf " -$vel\n-$vel\n0" > vel
 			;;
 		a)
-			printf " -$(($vel*2))\n$vel\n0" > vel
+			printf " -$vel\n$(($vel*2))\n0" > vel
 			;;
 		d)
-			printf " $vel\n-$(($vel*2))\n0)" > vel
+			printf " $(($vel*2))\n-$vel\n0)" > vel
 			;;
 		q)
-			printf " $(($vel/3))\n$(($vel))\n0" > vel
+			printf " $(($vel))\n$(($vel*2))\n0" > vel
 			;;
 		e)
-			printf " $(($vel))\n$(($vel/3))\n0" > vel
+			printf " $(($vel*2))\n$(($vel))\n0" > vel
 			;;
 		z)
 			printf " 0\n0\n $vel" > vel
