@@ -2,7 +2,7 @@
 key=w
 vel=0
 vfwd=(0 40 45 50 55 60 65 70 80 100)
-vbwd=(0 8 10 12 15 20 25 30 50 100)
+vbwd=(0 5 8 10 12 15 20 30 50 100)
 while true; do
 	read -n 1 resp
 	case $resp in
