@@ -4,6 +4,7 @@ vel=0
 vfwd=(0 40 45 50 55 60 65 70 80 100)
 vbwd=(0 8 10 12 15 20 25 30 50 100)
 vtur=(0 3 5 7 9 12 15 20 50 100)
+vele=(0 100 100 100 100 100 100 100 100 100)
 while true; do
 	read -n 1 resp
 	case $resp in
@@ -76,10 +77,10 @@ while true; do
 			printf " ${vfwd[vel]}\n-${vtur[vel]}\n0)" > vel
 			;;
 		z)
-			printf " 0\n0\n ${vfwd[vel]}" > vel
+			printf " 0\n0\n ${vele[vel]}" > vel
 			;;
 		x)
-			printf " 0\n0\n-${vfwd[vel]}" > vel
+			printf " 0\n0\n-${vele[vel]}" > vel
 			;;
 	esac
 done
