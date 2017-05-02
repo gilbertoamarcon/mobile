@@ -1,90 +1,65 @@
 #!/bin/bash
-bwd=2
-vela=0
-velb=0
 vel=0
-dir=w
+key=w
 while true; do
 	read -n 1 resp
 	case $resp in
 		w)
-			dir=w
+			key=w
 			;;
 		s)
-			dir=s
+			key=s
 			;;
 		a)
-			dir=a
+			key=a
 			;;
 		d)
-			dir=d
+			key=d
 			;;
 		q)
-			dir=q
+			key=q
 			;;
 		e)
-			dir=e
+			key=e
 			;;
 		z)
-			dir=z
+			key=z
 			;;
 		x)
-			dir=x
+			key=x
 			;;
 		9)
-			vela=100
+			vel=100
 			;;
 		8)
-			vela=90
+			vel=90
 			;;
 		7)
-			vela=80
+			vel=80
 			;;
 		6)
-			vela=70
+			vel=60
 			;;
 		5)
-			vela=60
+			vel=40
 			;;
 		4)
-			vela=50
+			vel=20
 			;;
 		3)
-			vela=40
+			vel=15
 			;;
 		2)
-			vela=30
+			vel=10
 			;;
 		1)
-			vela=20
+			vel=5
 			;;
 		0)
-			vela=0
-			;;
-		p)
-			velb=0
-			;;
-		o)
-			velb=1
-			;;
-		i)
-			velb=2
-			;;
-		u)
-			velb=3
-			;;
-		y)
-			velb=4
-			;;
-		t)
-			velb=5
-			;;
-		r)
-			velb=6
+			vel=0
 			;;
 	esac
-	vel=$((vela-velb))
-	case $dir in
+	case $key in
 		w)
 			printf " $(($vel*2))\n$(($vel*2))\n0" > vel
 			;;
