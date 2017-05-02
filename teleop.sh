@@ -3,7 +3,6 @@ bwd=2
 vela=0
 velb=0
 vel=0
-svel=0
 dir=w
 while true; do
 	read -n 1 resp
@@ -25,6 +24,12 @@ while true; do
 			;;
 		e)
 			dir=e
+			;;
+		z)
+			dir=z
+			;;
+		x)
+			dir=x
 			;;
 		9)
 			vela=100
@@ -77,14 +82,6 @@ while true; do
 		r)
 			velb=6
 			;;
-		z)
-			dir=z
-			svel=10
-			;;
-		x)
-			dir=x
-			svel=10
-			;;
 	esac
 	vel=$((vela-velb))
 	case $dir in
@@ -107,10 +104,10 @@ while true; do
 			printf " $(($vel))\n$(($vel/3))\n0" > vel
 			;;
 		z)
-			printf " $0\n0\n$svel" > vel
+			printf " 0\n0\n $vel" > vel
 			;;
 		x)
-			printf " $0\n0\n-$svel" > vel
+			printf " 0\n0\n-$vel" > vel
 			;;
 	esac
 done
