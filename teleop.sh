@@ -1,8 +1,8 @@
 #!/bin/bash
 vel=0
 key=w
-vfwd=(0 5 10 15 20 40 60 80 90 100)
-vbwd=(0 5 10 15 20 40 60 80 90 100)
+vfwd=(0 30 35 40 45 50 60 80 90 100)
+vbwd=(0 8 10 12 15 20 25 30 50 100)
 while true; do
 	read -n 1 resp
 	case $resp in
