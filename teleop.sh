@@ -2,7 +2,8 @@
 key=w
 vel=0
 vfwd=(0 40 45 50 55 60 65 70 80 100)
-vbwd=(0 5 8 10 12 15 20 30 50 100)
+vbwd=(0 8 10 12 15 20 25 30 50 100)
+vtur=(0 3 5 7 9 12 15 20 50 100)
 while true; do
 	read -n 1 resp
 	case $resp in
@@ -69,10 +70,10 @@ while true; do
 			printf " -${vbwd[vel]}\n-${vbwd[vel]}\n0" > vel
 			;;
 		a)
-			printf " -${vbwd[vel]}\n${vfwd[vel]}\n0" > vel
+			printf " -${vtur[vel]}\n${vfwd[vel]}\n0" > vel
 			;;
 		d)
-			printf " ${vfwd[vel]}\n-${vbwd[vel]}\n0)" > vel
+			printf " ${vfwd[vel]}\n-${vtur[vel]}\n0)" > vel
 			;;
 		z)
 			printf " 0\n0\n ${vfwd[vel]}" > vel
