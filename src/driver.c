@@ -45,8 +45,8 @@ int main(int argc, char *argv[]){
 	int delay_e		= (int)(STEP_SF/75);
 
 	// Elevator variables
-	int curr_step	= 1;
-	int goal_step	= 1;
+	int curr_step	= 0;
+	int goal_step	= 0;
 	int eticks 		= 0;
 
 	// Pin output config
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]){
 				digitalWrite(PIN_D, HIGH);
 			if(goal_step < curr_step)
 				digitalWrite(PIN_D, LOW);
-			eticks = TICK_STEP*(int)abs(goal_step-curr_step);
+			eticks = TICK_STEP;
 			for(int i = 0; i < eticks; i++){
 				delayMicroseconds(delay_e);
 				digitalWrite(PIN_S, HIGH);

@@ -6,21 +6,17 @@ vbwd=(0 100 50 30 25 20 15 12 10 8)
 vtfw=(0 100 95 90 85 80 75 70 65 58)
 vtbw=(0 100 90 80 70 60 40 30 25 18)
 
-# Elevator values
-pele=(15 16 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 15 16)
-
 # Value keys
 ckey=0
-ekey=1
 
 # Operation modes
 opmode=w 
 eside=0 # Elevator even(0) odd(1)
+elpos=0
 
 # Output buffers
 lvel=0
 rvel=0
-eheight=1
 
 while true; do
 
@@ -34,11 +30,7 @@ while true; do
 
 	# Value
 	if [[ $resp == [0-9] ]] ; then
-		if [[ $opmode == z ]] ||  [[ $opmode == x ]] || [[ $opmode == Z ]] ||  [[ $opmode == X ]] ; then
-			ekey=$resp # Elevator key
-		else
-			ckey=$resp # Car key
-		fi
+		ckey=$resp # Car key
 	fi
 
 	# Operation modes
@@ -60,17 +52,15 @@ while true; do
 			rvel=-${vtbw[ckey]}
 			;;
 		z|Z)
-			eside=0
+			elpos=$(($elpos-1))
 			;;
 		x|X)
-			eside=1
+			elpos=$(($elpos+1))
 			;;
 	esac
 
-
 	# Printing out to file
-	eheight=${pele[$((ekey*2+eside))]}
-	printf " $lvel\n$rvel\n$eheight" > vel
+	printf " $lvel\n$rvel\n$elpos" > vel
 
 done
 
