@@ -11,7 +11,8 @@ ckey=0
 
 # Operation modes
 opmode=w 
-eside=0 # Elevator even(0) odd(1)
+sstep=1
+bstep=8
 elpos=0
 
 # Output buffers
@@ -52,10 +53,16 @@ while true; do
 			rvel=-${vtbw[ckey]}
 			;;
 		z|Z)
-			elpos=$(($elpos-1))
+			elpos=$(($elpos-$bstep))
 			;;
 		x|X)
-			elpos=$(($elpos+1))
+			elpos=$(($elpos+$bstep))
+			;;
+		c|C)
+			elpos=$(($elpos-$sstep))
+			;;
+		v|V)
+			elpos=$(($elpos+$sstep))
 			;;
 	esac
 

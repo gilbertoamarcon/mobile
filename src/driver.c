@@ -28,7 +28,7 @@
 
 // Elevator Parameters
 #define TOTAL_TICKS	23750
-#define TOTAL_STEPS	16
+#define TOTAL_STEPS	128
 #define TICK_STEP	TOTAL_TICKS/TOTAL_STEPS
 
 int main(int argc, char *argv[]){
@@ -63,21 +63,6 @@ int main(int argc, char *argv[]){
 	char buffer_l[B_SIZE];
 	char buffer_r[B_SIZE];
 	char buffer_e[B_SIZE];
-	
-	// Arbitrarily move the elevator
-	if(argc > 1){
-		if(argv[1][0] == 'u')
-			digitalWrite(PIN_D, HIGH);
-		else
-			digitalWrite(PIN_D, LOW);
-		for(int i = 0; i < TOTAL_TICKS; i++){
-			if(i%100 == 0) printf("%5d\n",i);
-			delayMicroseconds(delay_e);
-			digitalWrite(PIN_S, HIGH);
-			delayMicroseconds(delay_e);
-			digitalWrite(PIN_S, LOW);
-		}
-	}
 
 	// Main loop
 	for(;;){
@@ -135,7 +120,7 @@ int main(int argc, char *argv[]){
 				digitalWrite(PIN_D, HIGH);
 			if(goal_step < curr_step)
 				digitalWrite(PIN_D, LOW);
-			eticks = TICK_STEP;
+			eticks = TICK_STEP*abs(goal_step - curr_step);
 			for(int i = 0; i < eticks; i++){
 				delayMicroseconds(delay_e);
 				digitalWrite(PIN_S, HIGH);
@@ -143,7 +128,6 @@ int main(int argc, char *argv[]){
 				digitalWrite(PIN_S, LOW);
 			}
 			curr_step = goal_step;
-			printf("curr_step: %2d\n",curr_step);
 		}
 		#endif
 	}
