@@ -1,0 +1,45 @@
+# Raspberry PI 3 tty via bluetooth
+# This article explains how to use bluetooth for serial tty connection to your Raspberry PI 3.
+
+# PAIR YOUR DEVICE
+# First, pair the bluetooth device with bluetooth
+bluetoothctl
+power on
+discoverable on
+quit
+# … and pair the rpi to your device.
+
+# SET COMPATIBILITY MODE
+# Set compatibility mode to your Bluetooth adapter. Edit the line “ExecStart” and add the line “ExecStartPost”
+sudo geany /etc/systemd/system/dbus-org.bluez.service
+ExecStart=/usr/lib/bluetooth/bluetoothd -C
+ExecStartPost=/usr/bin/sdptool add SP
+
+# CONFIGURE RFCOMM
+# Then configure the rfcomm-service to start console and automaticly log in a user. (change <user> with the account you want to automaticly log in)
+
+sudo geany /etc/systemd/system/rfcomm.service
+
+[Unit]
+Description=RFCOMM service
+After=bluetooth.service
+Requires=bluetooth.service
+ 
+[Service]
+ExecStart=/usr/bin/rfcomm watch hci0 1 getty rfcomm0 115200 vt100 -a <user>
+ 
+[Install]
+WantedBy=multi-user.target
+
+# Then we’ll enable the service at boot and start the rfcomm-service
+
+sudo systemctl enable rfcomm
+sudo systemctl start rfcomm
+
+# ADDING THE SERIAL DEVICE TO WINDOWS (10)
+# Settings > Devices > Bluetooth > “More Bluetooth Options” > COM Ports > Add.
+# Select “outgoing” and the hostname of your RPI should pop up in the list.
+# Windows will assign a “COMx”-port. Connect to the port with your favorite terminal emulator :)
+
+# SOURCE
+# RPI forum: https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=144896&p=955979&hilit=bluetooth+tty#p955979
